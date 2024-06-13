@@ -7,8 +7,8 @@ package burgerking;
 import java.io.IOException;
 
 /**
- *
- * @author Ariel
+ * 
+ * @author Nicolas Guinzio & Ariel Risoluto.
  */
 public class ControlIngreso {
 
@@ -29,18 +29,27 @@ public class ControlIngreso {
             do {
                 usuario = EntradaSalida.leerString("\tARRANQUE DE SISTEMA\n\n" + "ingrese un administrador\nUsuario:");
                 contraseña = EntradaSalida.leerString("Contraseña:");
-
+                
+                /*
                 if (!usuario.equals("") && !contraseña.equals("")) {
                     
                     try {
                         sistema.getEmpleado().add(new Administrador(usuario, contraseña));
                         sistema.serializar("base_empleados.txt");
-                        System.out.println("ingreso correcto");
+                        System.out.println("---ingreso correcto---\n");
                     } catch (IOException e) {
                     }
                 } else {
                     System.out.println("\n***el usuario y/o la contraseña no pueden ser nulos***\n"
                             + "Por favor ingrese nuevamente\n");
+                }*/
+                if(EntradaSalida.ingresarUsuario(usuario, contraseña, sistema)){
+                    try {
+                        sistema.getEmpleado().add(new Administrador(usuario, contraseña));
+                        sistema.serializar("base_empleados.txt");
+                        System.out.println("---ingreso correcto---\n");
+                    } catch (IOException e) {
+                    }
                 }
             } while (contraseña.equals("") || usuario.equals(""));
             System.out.println("El administrador fue ingresado correctamente por favor reincie el sistema");
@@ -50,9 +59,10 @@ public class ControlIngreso {
             usuario = EntradaSalida.leerString("Usuraio: ");
             contraseña = EntradaSalida.leerString("Contraseña: ");
             
+            /*
             if (!usuario.equals("") && !contraseña.equals("")) {
                
-                Persona p = sistema.buscarEmpleado(usuario,contraseña);
+                Persona p = sistema.buscarUsuario(usuario,contraseña);
                 if(p == null){
                     System.out.println("usario no encontrado");
                 }else{
@@ -62,6 +72,14 @@ public class ControlIngreso {
             } else{
                 System.out.println("\n***el usuario y/o la contraseña no pueden ser nulos***\n"
                         + "Por favor ingrese nuevamente\n");
+            }*/
+            
+            if(!EntradaSalida.ingresarUsuario(usuario, contraseña, sistema)){
+                System.out.println("ingreso correcto");
+                Persona p = sistema.buscarUsuario(usuario,contraseña);
+                validar = p.trabajar(sistema);
+            }else{
+                EntradaSalida.mostrarTexto("usuario no encontrado");
             }
         }
 

@@ -1,5 +1,8 @@
 package burgerking;
-
+/**
+ * 
+ * @author Nicolas Guinzio & Ariel Risoluto.
+ */
 public class Cocineros extends Persona {
 
     public Cocineros(String user, String password) {

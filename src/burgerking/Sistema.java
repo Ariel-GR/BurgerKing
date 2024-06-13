@@ -13,8 +13,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- *
- * @author Ariel
+ * 
+ * @author Nicolas Guinzio & Ariel Risoluto.
  */
 public class Sistema implements Serializable{
     
@@ -49,7 +49,7 @@ public class Sistema implements Serializable{
         f.close();
     }
     
-    public Persona buscarEmpleado(String usuario, String contraseña){
+    public Persona buscarUsuario(String usuario,String contraseña){
             Persona p = null;
             int i = 0;
             int tamArray = empleado.size();

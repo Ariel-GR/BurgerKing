@@ -1,5 +1,10 @@
 package burgerking;
 
+/**
+ * 
+ * @author Nicolas Guinzio & Ariel Risoluto.
+ */
+
 import java.io.Serializable;
 
 public abstract class Persona implements Serializable{

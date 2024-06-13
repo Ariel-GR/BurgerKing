@@ -5,8 +5,8 @@
 package burgerking;
 
 /**
- *
- * @author Ariel
+ * 
+ * @author Nicolas Guinzio & Ariel Risoluto.
  */
 public class Main {
 

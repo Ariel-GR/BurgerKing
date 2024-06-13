@@ -1,5 +1,8 @@
 package burgerking;
-
+/**
+ * 
+ * @author Nicolas Guinzio & Ariel Risoluto.
+ */
 public class Gerentes extends Persona {
 
     public Gerentes(String user, String password) {

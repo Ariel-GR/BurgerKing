@@ -1,5 +1,8 @@
 package burgerking;
-
+/**
+ * 
+ * @author Nicolas Guinzio & Ariel Risoluto.
+ */
 public class Inspectores extends Persona{
 
     public Inspectores(String user, String password) {
