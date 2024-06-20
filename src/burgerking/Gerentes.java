@@ -54,9 +54,7 @@ public class Gerentes extends Persona {
             }
             
         } while (opcion != 0);
-        
-        
-            
+   
         return false;
     }
     

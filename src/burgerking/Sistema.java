@@ -147,14 +147,5 @@ public class Sistema implements Serializable {
                 }
                 break;
         }
-        /*
-        for(int i = 0; i<empleado.size();i++){
-            //esto esta modo prueba ojo se pueden quedar sin admin 
-            if(empleado.get(i).getUser().equals(nombre)){
-                String u = empleado.get(i).getUser();
-                String p = empleado.get(i).getPassword();
-                getEmpleado().set(i, new Cocineros(u,p));//es solo de prueba esto esta pesimo... pero funciona =D!
-            }
-        }*/
     }
 }
