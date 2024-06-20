@@ -6,6 +6,7 @@ package burgerking;
 
 import java.util.Scanner;
 
+
 /**
  * 
  * @author Nicolas Guinzio & Ariel Risoluto.
@@ -28,8 +29,7 @@ public class EntradaSalida {
         Scanner scan = new Scanner(System.in);
         System.out.println(texto);
         int nro = scan.nextInt();
-        
-        
+
         return nro; 
     } 
     
@@ -44,21 +44,5 @@ public class EntradaSalida {
     public static void mostrarTexto(String texto){
         System.out.println(texto);
     }
-    
-    public static boolean ingresarUsuario(String user,String pass,Sistema sistema){
         
-        boolean comprobar = false;
-        
-        if(user.equals("") || pass.equals("")){
-            System.out.println("\n***el usuario y/o la contraseña no pueden ser nulos***\n"
-                                + "Por favor ingrese nuevamente\n");
-        }else{
-            Persona p = sistema.buscarUsuario(user,pass);
-            
-            if(p == null){
-                comprobar = true;
-            }
-        }
-        return comprobar;
-    }
 }

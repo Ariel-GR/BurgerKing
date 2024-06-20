@@ -4,6 +4,7 @@
  */
 package burgerking;
 
+import static burgerking.EntradaSalida.mostrarTexto;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -11,19 +12,21 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
- * 
+ *
  * @author Nicolas Guinzio & Ariel Risoluto.
  */
-public class Sistema implements Serializable{
-    
+public class Sistema implements Serializable {
+
     private ArrayList<Persona> empleado;
 
     public Sistema() {
         empleado = new ArrayList<Persona>();
     }
-    
+
     public ArrayList<Persona> getEmpleado() {
         return empleado;
     }
@@ -31,16 +34,16 @@ public class Sistema implements Serializable{
     public void setEmpleado(ArrayList<Persona> empleado) {
         this.empleado = empleado;
     }
-    
+
     public Sistema deSerializar(String a) throws IOException, ClassNotFoundException {
         FileInputStream f = new FileInputStream(a);
         ObjectInputStream o = new ObjectInputStream(f);
-        Sistema s = (Sistema)o.readObject();//se debe castear al objeto que se desea leer
+        Sistema s = (Sistema) o.readObject();//se debe castear al objeto que se desea leer
         o.close();
         f.close();
         return s;
     }
-    
+
     public void serializar(String a) throws IOException {
         FileOutputStream f = new FileOutputStream(a);
         ObjectOutputStream o = new ObjectOutputStream(f);
@@ -48,24 +51,110 @@ public class Sistema implements Serializable{
         o.close();
         f.close();
     }
-    
-    public Persona buscarUsuario(String usuario,String contraseña){
-            Persona p = null;
-            int i = 0;
-            int tamArray = empleado.size();
-            boolean flag = false;
-            
-            while(i < tamArray){
-                p = empleado.get(i);
-                
-                if(usuario.equals(p.getUser()) && contraseña.equals(p.getPassword())){
-                   flag = true;
-                   i = tamArray;
-                }else{
-                    i++; 
-                }
+
+    public Persona buscarUsuario(String credenciales) {
+
+        for (Persona p : empleado) {
+            if (p.encontrarCredenciales(credenciales)) {
+                EntradaSalida.mostrarTexto("\n---Usuario Encontrado---\n");
+                return p;
             }
-            
-            return (!flag?p=null:p);
+        }
+        return null;
+    }
+
+    public static boolean validarIngreso(String user, String pass) {
+        boolean validar = (user.equals("") || pass.equals(""));
+
+        if (validar) {
+            EntradaSalida.mostrarTexto("\n***el usuario y/o la contraseña no pueden ser nulos***\n"
+                    + "Por favor ingrese nuevamente\n");
+        }
+
+        return validar;
+    }
+
+    public void listaPorRoles(String referencia) {
+
+        for (int i = 0; i < empleado.size(); i++) {
+
+            try {
+                if (empleado.get(i).getClass() == Class.forName(referencia)) {
+                    mostrarTexto(empleado.get(i).getUser());
+                }
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(EntradaSalida.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    public String buscarPorRol(String usuario) throws ClassNotFoundException{
+        
+        String rol = null;
+        
+        for(int i = 0;i<empleado.size();i++){
+        
+            if(empleado.get(i).getUser().equals(usuario)){
+               if(empleado.get(i).getClass() == Class.forName("burgerking.Administrador")){
+                   rol = "Administrador";
+               }else if(empleado.get(i).getClass() == Class.forName("burgerking.Cocineros")){
+                   rol = "Cocinero";
+               }else if(empleado.get(i).getClass() == Class.forName("burgerking.Vendedor")){
+                   rol = "Vendedor";
+               }else if(empleado.get(i).getClass() == Class.forName("burgerking.Gerentes")){
+                   rol = "Gerente";
+               }else if(empleado.get(i).getClass() == Class.forName("burgerking.Inspectores")){
+                   rol = "Inspector";
+               }           
+            }
+        }        
+        return rol;
+    }
+    
+    public void modificarRol(String user,String rol){
+        
+        String pass = null;
+        int index = 0;
+        
+        for(int i = 0; i<empleado.size();i++){
+            if(empleado.get(i).getUser().equals(user)){
+                pass = empleado.get(i).getPassword();
+                index = i;
+            }
+        }
+        
+        switch(rol){
+            case "Vendedor":
+                if(EntradaSalida.siNo("Roles disponibles: \n\t+Cocinero\nPara efectuar el cambio ingrese -si- caso contrario -no-:")){
+                    getEmpleado().set(index,new Cocineros(user,pass));
+                    try{
+                    serializar("base_empleados.txt");
+                    }catch(IOException e){
+                        System.out.println("error grabar archivo");
+                    }
+                    EntradaSalida.mostrarTexto("\n---MODIFICACION DE ROL REALIZADA---");
+                }
+                break;
+            case "Cocinero":
+                if(EntradaSalida.siNo("Roles disponibles: \n\t+Vendedor\nPara efectuar el cambio ingrese -si- caso contrario -no-:")){
+                    getEmpleado().set(index,new Vendedor(user,pass));
+                    try{
+                    serializar("base_empleados.txt");
+                    }catch(IOException e){
+                        System.out.println("error grabar archivo");
+                    }
+                    EntradaSalida.mostrarTexto("\n---MODIFICACION DE ROL REALIZADA---");
+                }
+                break;
+        }
+        /*
+        for(int i = 0; i<empleado.size();i++){
+            //esto esta modo prueba ojo se pueden quedar sin admin 
+            if(empleado.get(i).getUser().equals(nombre)){
+                String u = empleado.get(i).getUser();
+                String p = empleado.get(i).getPassword();
+                getEmpleado().set(i, new Cocineros(u,p));//es solo de prueba esto esta pesimo... pero funciona =D!
+            }
+        }*/
     }
 }

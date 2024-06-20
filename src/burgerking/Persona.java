@@ -30,4 +30,7 @@ public abstract class Persona implements Serializable{
     
     public abstract boolean trabajar(Sistema sistema);
     
+    public boolean encontrarCredenciales(String credenciales){
+        return credenciales.equals(user+":"+password);
+    }
 }

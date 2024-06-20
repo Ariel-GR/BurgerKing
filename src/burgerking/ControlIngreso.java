@@ -26,62 +26,34 @@ public class ControlIngreso {
             validar = EntradaSalida.siNo("Para ingresar al sistma -si- para salir -no- ");
 
         } catch (Exception ex) {
+            EntradaSalida.mostrarTexto("\tARRANQUE DE SISTEMA\n\n");
             do {
-                usuario = EntradaSalida.leerString("\tARRANQUE DE SISTEMA\n\n" + "ingrese un administrador\nUsuario:");
-                contraseña = EntradaSalida.leerString("Contraseña:");
-                
-                /*
-                if (!usuario.equals("") && !contraseña.equals("")) {
-                    
-                    try {
+                usuario = EntradaSalida.leerString("ingrese un administrador\nUsuario:");
+                contraseña = EntradaSalida.leerString("Contraseña:"); 
+            }while (sistema.validarIngreso(usuario, contraseña));
+            
+            try {
                         sistema.getEmpleado().add(new Administrador(usuario, contraseña));
                         sistema.serializar("base_empleados.txt");
-                        System.out.println("---ingreso correcto---\n");
+                        EntradaSalida.mostrarTexto("El administrador fue ingresado correctamente por favor reincie el sistema");
                     } catch (IOException e) {
                     }
-                } else {
-                    System.out.println("\n***el usuario y/o la contraseña no pueden ser nulos***\n"
-                            + "Por favor ingrese nuevamente\n");
-                }*/
-                if(EntradaSalida.ingresarUsuario(usuario, contraseña, sistema)){
-                    try {
-                        sistema.getEmpleado().add(new Administrador(usuario, contraseña));
-                        sistema.serializar("base_empleados.txt");
-                        System.out.println("---ingreso correcto---\n");
-                    } catch (IOException e) {
-                    }
-                }
-            } while (contraseña.equals("") || usuario.equals(""));
-            System.out.println("El administrador fue ingresado correctamente por favor reincie el sistema");
         }
 
         while (validar) {
             usuario = EntradaSalida.leerString("Usuraio: ");
             contraseña = EntradaSalida.leerString("Contraseña: ");
-            
-            /*
-            if (!usuario.equals("") && !contraseña.equals("")) {
-               
-                Persona p = sistema.buscarUsuario(usuario,contraseña);
+
+            if(!sistema.validarIngreso(usuario, contraseña)){
+                Persona p = sistema.buscarUsuario(usuario+":"+contraseña);
                 if(p == null){
-                    System.out.println("usario no encontrado");
+                    EntradaSalida.mostrarTexto("\nUsuario NO encontrado\n");
                 }else{
-                    System.out.println("ingreso correcto");
-                    validar = p.trabajar(sistema); 
-                }  
-            } else{
-                System.out.println("\n***el usuario y/o la contraseña no pueden ser nulos***\n"
-                        + "Por favor ingrese nuevamente\n");
-            }*/
-            
-            if(!EntradaSalida.ingresarUsuario(usuario, contraseña, sistema)){
-                System.out.println("ingreso correcto");
-                Persona p = sistema.buscarUsuario(usuario,contraseña);
-                validar = p.trabajar(sistema);
+                    validar = p.trabajar(sistema);
+                }
             }else{
-                EntradaSalida.mostrarTexto("usuario no encontrado");
+                EntradaSalida.mostrarTexto("\n***usuario no encontrado***\n");
             }
         }
-
     }
 }

@@ -12,7 +12,8 @@ public class Cocineros extends Persona {
 
     @Override
     public boolean trabajar(Sistema sistema) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        EntradaSalida.mostrarTexto("Tomar pedido y Cocinar");
+        return false;
     }
     
     

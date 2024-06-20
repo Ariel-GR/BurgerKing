@@ -23,42 +23,74 @@ public class Administrador extends Persona {
         
         int opcion;
         boolean validar = false;
+        String usuarioNuevo;
+        String contraseñaNueva;
         
         do {
             opcion = EntradaSalida.leerNro(
                     "\tMENU\n"
-                    +"1- Ingresar Vendedor\n"
-                    + "2-Ingresar Cocinero\n"
-                    + "3-Ingresar Gerente\n"
-                    + "4-Ingresar Inpector\n"
-                    + "5-Finalizar Carga");
+                    + "1 - Ingresar Vendedor\n"
+                    + "2 - Ingresar Cocinero\n"
+                    + "3 - Ingresar Gerente\n"
+                    + "4 - Ingresar Inpector\n"
+                    + "5 - Finalizar Carga");
 
             switch (opcion) {
                 case 1:
-                    String vendedorUser = EntradaSalida.leerString("Alta de VENDEDOR\nUsuario:");
-                    String vendedorPassword = EntradaSalida.leerString("Contraseña:");
+                    usuarioNuevo = EntradaSalida.leerString("Alta de VENDEDOR\nUsuario:");
+                    contraseñaNueva = EntradaSalida.leerString("Contraseña:");
                     
-                    if(EntradaSalida.ingresarUsuario(vendedorUser,vendedorPassword,sistema)){
-                        sistema.getEmpleado().add(new Vendedor(vendedorUser,vendedorPassword));
-                        System.out.println("---ingreso correcto del VENDEDOR: "+vendedorUser+"---\n");
-                    }else{
-                        EntradaSalida.mostrarTexto("\n***usuario ya igresado***\n");
-                    }
-                    /*
-                    if (!vendedorUser.equals("") && !vendedorPassword.equals("")) {
-                        Persona p = sistema.buscarEmpleado(vendedorUser,vendedorPassword);
-                        if(p != null){
-                            EntradaSalida.mostrarTexto("El usuario ya fue ingresado");
+                    if(!sistema.validarIngreso(usuarioNuevo,contraseñaNueva)){
+                        Persona p = sistema.buscarUsuario(usuarioNuevo+":"+contraseñaNueva);
+                        if(p == null){
+                            sistema.getEmpleado().add(new Vendedor(usuarioNuevo,contraseñaNueva));
+                            System.out.println("---ingreso correcto del VENDEDOR: "+usuarioNuevo+"---\n");
                         }else{
-                            sistema.getEmpleado().add(new Vendedor(vendedorUser,vendedorPassword));
-                            System.out.println("---ingreso correcto del VENDEDOR: "+vendedorUser+"---\n");
-                        }                       
-                    } else {
-                        System.out.println("\n***el usuario y/o la contraseña no pueden ser nulos***\n"
-                                + "Por favor ingrese nuevamente\n");
+                            EntradaSalida.mostrarTexto("\n***No se puede dar de alta, el USUARIO: "+usuarioNuevo+" ya fue ingresado***\n");
+                        }
                     }
-                    */
+                    break;
+                case 2:
+                    usuarioNuevo = EntradaSalida.leerString("Alta de COCINERO\nUsuario:");
+                    contraseñaNueva = EntradaSalida.leerString("Contraseña:");
                     
+                    if(!sistema.validarIngreso(usuarioNuevo,contraseñaNueva)){
+                        Persona p = sistema.buscarUsuario(usuarioNuevo+":"+contraseñaNueva);
+                        if(p == null){
+                            sistema.getEmpleado().add(new Cocineros(usuarioNuevo,contraseñaNueva));
+                            System.out.println("---ingreso correcto del VENDEDOR: "+usuarioNuevo+"---\n");
+                        }else{
+                            EntradaSalida.mostrarTexto("\n***No se puede dar de alta, el USUARIO: "+usuarioNuevo+" ya fue ingresado***\n");
+                        }
+                    }
+                    break;
+                case 3:
+                    usuarioNuevo = EntradaSalida.leerString("Alta de GERENTE\nUsuario:");
+                    contraseñaNueva = EntradaSalida.leerString("Contraseña:");
+                    
+                    if(!sistema.validarIngreso(usuarioNuevo,contraseñaNueva)){
+                        Persona p = sistema.buscarUsuario(usuarioNuevo+":"+contraseñaNueva);
+                        if(p == null){
+                            sistema.getEmpleado().add(new Gerentes(usuarioNuevo,contraseñaNueva));
+                            System.out.println("---ingreso correcto del VENDEDOR: "+usuarioNuevo+"---\n");
+                        }else{
+                            EntradaSalida.mostrarTexto("\n***No se puede dar de alta, el USUARIO: "+usuarioNuevo+" ya fue ingresado***\n");
+                        }
+                    }
+                    break;
+                case 4:
+                    usuarioNuevo = EntradaSalida.leerString("Alta de INSPECTOR\nUsuario:");
+                    contraseñaNueva = EntradaSalida.leerString("Contraseña:");
+                    
+                    if(!sistema.validarIngreso(usuarioNuevo,contraseñaNueva)){
+                        Persona p = sistema.buscarUsuario(usuarioNuevo+":"+contraseñaNueva);
+                        if(p == null){
+                            sistema.getEmpleado().add(new Inspectores(usuarioNuevo,contraseñaNueva));
+                            System.out.println("---ingreso correcto del VENDEDOR: "+usuarioNuevo+"---\n");
+                        }else{
+                            EntradaSalida.mostrarTexto("\n***No se puede dar de alta, el USUARIO: "+usuarioNuevo+" ya fue ingresado***\n");
+                        }
+                    }
                     break;
             }
             
