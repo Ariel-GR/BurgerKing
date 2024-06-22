@@ -1,6 +1,5 @@
 package burgerking;
 
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,16 +16,12 @@ public class Gerentes extends Persona {
 
     @Override
     public boolean trabajar(Sistema sistema) {
-        EntradaSalida.mostrarTexto("Asignar Roles");
         String solicitud;
         String usuario;
         int opcion;
         
         do {
-            opcion = EntradaSalida.leerNro("\n1 - consultar lista de VENDEDORES\n"
-                                           +"2 - Consultar lista de COCINEROS\n"
-                                           +"3 - Cambiar rol de usuario");
-            switch(opcion){
+            switch(opcion = EntradaSalida.menuGerentes()){
                 case 1: 
                     EntradaSalida.mostrarTexto("\tlista VENDEDORES\n");
                     sistema.listaPorRoles("burgerking.Vendedor");
@@ -45,17 +40,19 @@ public class Gerentes extends Persona {
                         }else{
                             sistema.modificarRol(usuario,solicitud);
                         }
-                        
-                        
+  
                     } catch (ClassNotFoundException ex) {
                         Logger.getLogger(Gerentes.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     break;
-            }
-            
+                case 4:
+                    if(!sistema.altaUsuario()){
+                        EntradaSalida.mostrarTexto("\n\tCargando sistema.....");
+                    }
+                    break;
+            }  
         } while (opcion != 0);
    
         return false;
     }
-    
 }
