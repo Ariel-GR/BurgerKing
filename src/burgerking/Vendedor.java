@@ -5,7 +5,7 @@ package burgerking;
  * @author Nicolas Guinzio & Ariel Risoluto.
  */
 public class Vendedor extends Persona {
-    private static final String[] INGREDIENTES_DISPONIBLES = {"Lechuga", "Tomate", "Cebolla", "Queso", "Panceta"};
+    
     public Vendedor(String user, String password) {
         setUser(user);
         setPassword(password);
@@ -18,9 +18,11 @@ public class Vendedor extends Persona {
         return false;
     }
     
-    private void tomarPedido() {
     
+    private void tomarPedido() {
 
+    Pedido pedido = new Pedido(EntradaSalida.leerString("Ingrese el nombre del cliente:"));
+        
     int opcionCombo = EntradaSalida.leerNro("Bienvenido al sistema de pedidos.\n"
     + "Por favor, seleccione el combo que desea ordenar:\n"
     + "1. Combo Simple\n"
@@ -30,13 +32,15 @@ public class Vendedor extends Persona {
     switch (opcionCombo) {
         case 1:
             EntradaSalida.mostrarTexto("Ha seleccionado el Combo Simple.");
-            // Aqui voy a destallar el combo.
+            pedido.pedidoSimple();
             break;
         case 2:
             EntradaSalida.mostrarTexto("Ha seleccionado el Combo Doble.");
+            pedido.pedidoDoble();
             break;
         case 3:
             EntradaSalida.mostrarTexto("Ha seleccionado el Combo Triple.");
+            pedido.pedidoTriple();
             break;
         default:
             EntradaSalida.mostrarTexto("Opción inválida.");
@@ -44,10 +48,12 @@ public class Vendedor extends Persona {
     }
     
      // Mostrar lista de ingredientes disponibles
-    EntradaSalida.mostrarTexto("\n\nIngredientes disponibles:");
-    for (int i = 0; i < INGREDIENTES_DISPONIBLES.length; i++) {
-        EntradaSalida.mostrarTexto((i + 1) + ". " + INGREDIENTES_DISPONIBLES[i]);
-    }
+    //EntradaSalida.mostrarTexto("\n\nIngredientes disponibles:");
+    //for (int i = 0; i < INGREDIENTES_DISPONIBLES.length; i++) {
+    //    EntradaSalida.mostrarTexto((i + 1) + ". " + INGREDIENTES_DISPONIBLES[i]);
+    //}
+    
+    
     // Permitir al cliente agregar ingredientes
     String opcionAgregar = EntradaSalida.leerString("¿Desea agregar ingredientes? (si/no)");
     if (opcionAgregar.equals("si")) {
