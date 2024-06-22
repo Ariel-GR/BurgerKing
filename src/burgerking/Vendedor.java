@@ -4,87 +4,76 @@ package burgerking;
  * 
  * @author Nicolas Guinzio & Ariel Risoluto.
  */
-import java.util.Scanner;
-
 public class Vendedor extends Persona {
-    private static final String[] INGREDIENTES_DISPONIBLES = {"Lechuga", "Tomate", "Cebolla", "Queso", "Tocino"};
-    private Scanner scanner;
+    private static final String[] INGREDIENTES_DISPONIBLES = {"Lechuga", "Tomate", "Cebolla", "Queso", "Panceta"};
     public Vendedor(String user, String password) {
         setUser(user);
         setPassword(password);
-        new Scanner(System.in);
     }
 
     @Override
     public boolean trabajar(Sistema sistema) {
-        System.out.println("Tomar pedido...");
+        EntradaSalida.mostrarTexto("Tomar pedido...");
         tomarPedido();
         return false;
     }
     
     private void tomarPedido() {
-    Scanner scanner = new Scanner(System.in);
     
-   
-    System.out.println("Bienvenido al sistema de pedidos.");
-    System.out.println("Por favor, seleccione el combo que desea ordenar:");
-    System.out.println("1. Combo Simple");
-    System.out.println("2. Combo Doble");
-    System.out.println("3. Combo Triple");
 
-    int opcionCombo = scanner.nextInt();
+    int opcionCombo = EntradaSalida.leerNro("Bienvenido al sistema de pedidos.\n"
+    + "Por favor, seleccione el combo que desea ordenar:\n"
+    + "1. Combo Simple\n"
+    + "2. Combo Doble\n"
+    + "3. Combo Triple\n");
 
     switch (opcionCombo) {
         case 1:
-            System.out.println("Ha seleccionado el Combo Simple.");
+            EntradaSalida.mostrarTexto("Ha seleccionado el Combo Simple.");
+            // Aqui voy a destallar el combo.
             break;
         case 2:
-            System.out.println("Ha seleccionado el Combo Doble.");
+            EntradaSalida.mostrarTexto("Ha seleccionado el Combo Doble.");
             break;
         case 3:
-            System.out.println("Ha seleccionado el Combo Triple.");
+            EntradaSalida.mostrarTexto("Ha seleccionado el Combo Triple.");
             break;
         default:
-            System.out.println("Opción inválida.");
+            EntradaSalida.mostrarTexto("Opción inválida.");
             return;
     }
     
      // Mostrar lista de ingredientes disponibles
-    System.out.println("\n\nIngredientes disponibles:");
+    EntradaSalida.mostrarTexto("\n\nIngredientes disponibles:");
     for (int i = 0; i < INGREDIENTES_DISPONIBLES.length; i++) {
-        System.out.println((i + 1) + ". " + INGREDIENTES_DISPONIBLES[i]);
+        EntradaSalida.mostrarTexto((i + 1) + ". " + INGREDIENTES_DISPONIBLES[i]);
     }
     // Permitir al cliente agregar ingredientes
-    System.out.println("¿Desea agregar ingredientes? (s/n)");
-    char opcionAgregar = scanner.next().charAt(0);
-    if (opcionAgregar == 's') {
-        System.out.println("Seleccione el número del ingrediente que desea agregar:");
-        int opcionIngrediente = scanner.nextInt();
+    String opcionAgregar = EntradaSalida.leerString("¿Desea agregar ingredientes? (si/no)");
+    if (opcionAgregar.equals("si")) {
+        int opcionIngrediente = EntradaSalida.leerNro("Seleccione el número del ingrediente que desea agregar:");
         // Lógica para agregar el ingrediente seleccionado
     }
 
     // Permitir al cliente quitar ingredientes
-    System.out.println("¿Desea quitar ingredientes? (s/n)");
-    char opcionQuitar = scanner.next().charAt(0);
-    if (opcionQuitar == 's') {
-        System.out.println("Seleccione el número del ingrediente que desea quitar:");
-        int opcionIngrediente = scanner.nextInt();
+    String opcionQuitar = EntradaSalida.leerString("¿Desea quitar ingredientes? (si/no)");
+    if (opcionQuitar.equals("si")) {
+        int opcionIngrediente = EntradaSalida.leerNro("Seleccione el número del ingrediente que desea quitar:");
         // Lógica para quitar el ingrediente seleccionado
     }
 
-    System.out.println("¿Desea cambiar el sabor de la gaseosa? (s/n)");
-    char opcionGaseosa = scanner.next().charAt(0);
-    if (opcionGaseosa == 's') {
+    String opcionGaseosa = EntradaSalida.leerString("¿Desea cambiar el sabor de la gaseosa? (si/no)");
+    if (opcionGaseosa.equals("si")) {
         // Lógica para cambiar el sabor de la gaseosa
     }
 
-    System.out.println("¿Desea agregar papas? (s/n)");
-    char opcionPapas = scanner.next().charAt(0);
-    if (opcionPapas == 's') {
+    String opcionPapas = EntradaSalida.leerString("¿Desea agregar papas? (si/no)");
+
+    if (opcionPapas.equals("si")) {
         // Lógica para agregar papas
     }
 
-    System.out.println("Pedido completado.");
+    EntradaSalida.mostrarTexto("Pedido completado.");
 }
 
 }
