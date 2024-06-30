@@ -3,6 +3,7 @@ package burgerking;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.time.LocalDate;
+import java.util.UUID;
 
 public class Pedido implements Serializable {
 
@@ -16,7 +17,7 @@ public class Pedido implements Serializable {
 
     // Constructor
     public Pedido(String id) {
-        this.id = id;
+        this.id = id + "-" + UUID.randomUUID().toString(); // Generar ID único usando UUID
         this.fecha = LocalDate.now();
         this.precio = precio;
         this.hamburguesas = new ArrayList<>();
@@ -61,14 +62,12 @@ public class Pedido implements Serializable {
         this.papas = papas;
     }
 
-    
-    
     public float getPrecio() {
         return precio;
     }
 
     public void setPrecio(float precio) {
-        
+
         this.precio += precio;
     }
 
@@ -80,10 +79,6 @@ public class Pedido implements Serializable {
         this.estado = estado;
     }
 
-
-    
-    
-    
     public void agregarComboSimple() {
         Hamburguesa hamburguesa = new Hamburguesa("Combo Simple", 1, 1, 1, 1, 1);
         Bebida bebida = new Bebida();
@@ -115,33 +110,5 @@ public class Pedido implements Serializable {
         this.papas.add(papa);
         precio = 200;
     }
-
-    public void mostrarPedido() {
-        EntradaSalida.limpiarPantalla();
-
-        StringBuilder sb = new StringBuilder();
-        sb.append("******************* BURGER KING *******************\n")
-                .append("Fecha: ").append(fecha).append("\n")
-                .append("ID: ").append(id).append("\n\n")
-                .append("Detalles del Pedido:\n");
-
-        for (int i = 0; i < hamburguesas.size(); i++) {
-
-            Hamburguesa hamburguesa = hamburguesas.get(i);
-            sb.append("Pedido: ");
-            hamburguesa.mostrarHamburguesa(sb);
-
-            Bebida bebida = bebidas.get(i);
-            sb.append("Bebida: ").append(bebida.getSabor()).append("\n");
-
-            Papa papa = papas.get(i);
-            sb.append("Papas: ").append(papa.getTamanio()).append("\n\n");
-        }
-
-        sb.append("Precio Total: $").append(getPrecio()).append("\n")
-                .append("***************************************************");
-        EntradaSalida.mostrarTexto(sb.toString());
-    }
-
     
 }

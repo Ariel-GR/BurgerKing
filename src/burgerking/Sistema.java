@@ -156,7 +156,7 @@ public class Sistema implements Serializable {
         int opcion;
         boolean seguir = false;
 
-        while ((opcion = EntradaSalida.menuAlta())!= 5){
+        while ((opcion = EntradaSalida.menuAlta()) != 5) {
             String usuarioNuevo = EntradaSalida.leerString("Usuario:");
             String contraseñaNueva = EntradaSalida.leerString("Contraseña:");
             if (!validarIngreso(usuarioNuevo, contraseñaNueva)) {
@@ -202,6 +202,47 @@ public class Sistema implements Serializable {
     public void setPedidos(ArrayList<Pedido> pedidos) {
         this.pedidos = pedidos;
     }
-    
-    
+
+    public void consultarPedidos(String estado) {
+        EntradaSalida.limpiarPantalla();
+
+        boolean hayPedidos = false;
+        StringBuilder sb = new StringBuilder();
+        sb.append("********** CONSULTA DE PEDIDOS **********\n\n");
+
+        for (Pedido pedido : pedidos) {
+            if ("TODOS".equalsIgnoreCase(estado) || pedido.getEstado().equalsIgnoreCase(estado)) {
+                hayPedidos = true;
+                sb.append("ID del Pedido: ").append(pedido.getId()).append("\n")
+                        .append("Fecha: ").append(pedido.getFecha()).append("\n")
+                        .append("Precio Total: $").append(pedido.getPrecio()).append("\n")
+                        .append("Estado: ").append(pedido.getEstado()).append("\n")
+                        .append("Detalles del Pedido:\n");
+
+                for (int i = 0; i < pedido.getHamburguesas().size(); i++) {
+                    sb.append("Combo ").append(i + 1).append(":\n");
+
+                    Hamburguesa hamburguesa = pedido.getHamburguesas().get(i);
+                    sb.append("Hamburguesa:\n");
+                    hamburguesa.mostrarHamburguesa(sb);
+
+                    Bebida bebida = pedido.getBebidas().get(i);
+                    sb.append("Bebida: ").append(bebida.getSabor()).append("\n");
+
+                    Papa papa = pedido.getPapas().get(i);
+                    sb.append("Papas: ").append(papa.getTamanio()).append("\n\n");
+                }
+
+                sb.append("----------------------------------------\n\n");
+            }
+        }
+
+        if (!hayPedidos) {
+            sb.append("No hay pedidos en el estado solicitado en este momento.\n");
+        }
+
+        sb.append("***************************************");
+
+        EntradaSalida.mostrarTexto(sb.toString());
+    }
 }

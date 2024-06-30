@@ -99,7 +99,7 @@ public class Vendedor extends Persona {
         } while (flag);
 
         EntradaSalida.mostrarTexto("Pedido completado.");
-        pedido.mostrarPedido();
+        sistema.consultarPedidos("INCOMPLETO");
 
         sistema.getPedidos().add(pedido);
 
