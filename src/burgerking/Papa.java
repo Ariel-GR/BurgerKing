@@ -4,13 +4,14 @@
  */
 package burgerking;
 
+import java.io.Serializable;
 
-public class Papas {
+
+public class Papa implements Serializable {
     
     String tamanio;
     
-  
-    public Papas(String tamanio){
+    public Papa(String tamanio){
         this.tamanio = tamanio;
     }
 

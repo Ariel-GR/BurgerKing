@@ -5,6 +5,7 @@
 package burgerking;
 
 import static burgerking.EntradaSalida.mostrarTexto;
+import burgerking.Pedido;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -22,9 +23,11 @@ import java.util.logging.Logger;
 public class Sistema implements Serializable {
 
     private ArrayList<Persona> empleado;
+    private ArrayList<Pedido> pedidos;
 
     public Sistema() {
         empleado = new ArrayList<>();
+        pedidos = new ArrayList<>();
     }
 
     public ArrayList<Persona> getEmpleado() {
@@ -47,7 +50,7 @@ public class Sistema implements Serializable {
     public void serializar(String a) throws IOException {
         FileOutputStream f = new FileOutputStream(a);
         ObjectOutputStream o = new ObjectOutputStream(f);
-        o.writeObject(this);//este objeto SistemaInscripcion
+        o.writeObject(this);
         o.close();
         f.close();
     }
@@ -139,7 +142,7 @@ public class Sistema implements Serializable {
                 if (EntradaSalida.siNo("Roles disponibles: \n\t+Vendedor\nPara efectuar el cambio ingrese -si- caso contrario -no-:")) {
                     getEmpleado().set(index, new Vendedor(user, pass));
                     try {
-                        serializar("base_empleados.txt");
+                        serializar("base_de_datos.txt");
                     } catch (IOException e) {
                         EntradaSalida.mostrarTexto("error grabar archivo");
                     }
@@ -178,7 +181,7 @@ public class Sistema implements Serializable {
                             break;
                     }
                     try {
-                        serializar("base_empleados.txt");
+                        serializar("base_de_datos.txt");
                     } catch (Exception e) {
                         EntradaSalida.mostrarTexto("error grabar archivo");
                     }
@@ -191,4 +194,14 @@ public class Sistema implements Serializable {
 
         return seguir;
     }
+
+    public ArrayList<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(ArrayList<Pedido> pedidos) {
+        this.pedidos = pedidos;
+    }
+    
+    
 }

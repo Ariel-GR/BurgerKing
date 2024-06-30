@@ -65,4 +65,10 @@ public class EntradaSalida {
                 + "0 - Salir");
     }
 
+    
+    public static void limpiarPantalla() {
+        for (int i = 0; i < 10; i++) {
+            System.out.println();
+        }
+    }
 }

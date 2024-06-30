@@ -21,7 +21,7 @@ public class ControlIngreso {
     public void ingresar() {
 
         try {
-            sistema = sistema.deSerializar("base_empleados.txt");
+            sistema = sistema.deSerializar("base_de_datos.txt");
             System.out.println("Bienvenido al sistema de BURGER KING");
             validar = EntradaSalida.siNo("Para ingresar al sistma -si- para salir -no- ");
 
@@ -34,14 +34,14 @@ public class ControlIngreso {
             
             try {
                         sistema.getEmpleado().add(new Administrador(usuario, contraseña));
-                        sistema.serializar("base_empleados.txt");
+                        sistema.serializar("base_de_datos.txt");
                         EntradaSalida.mostrarTexto("El administrador fue ingresado correctamente por favor reincie el sistema");
                     } catch (IOException e) {
                     }
         }
 
         while (validar) {
-            usuario = EntradaSalida.leerString("Usuraio: ");
+            usuario = EntradaSalida.leerString("Usuario: ");
             contraseña = EntradaSalida.leerString("Contraseña: ");
 
             if(!sistema.validarIngreso(usuario, contraseña)){

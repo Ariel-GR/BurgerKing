@@ -18,7 +18,7 @@ public class Administrador extends Persona {
     @Override
     public boolean trabajar(Sistema sistema) {
         EntradaSalida.mostrarTexto("Bienvenido Administrador\n");
-        
+       
         return sistema.altaUsuario();
     }
 }

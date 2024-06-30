@@ -4,11 +4,13 @@
  */
 package burgerking;
 
+import java.io.Serializable;
+
 /**
  *
  * @author nicol
  */
-public class Bebida {
+public class Bebida implements Serializable{
     private String sabor;
     
     public Bebida (){

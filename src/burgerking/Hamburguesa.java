@@ -4,18 +4,23 @@
  */
 package burgerking;
 
+import java.io.Serializable;
+
 /**
  *
  * @author nicol
  */
-public class Hamburguesa {
+public class Hamburguesa implements Serializable {
+
+    private String combo;
     private int carne;
-    private int cebolla;   
+    private int cebolla;
     private int lechuga;
     private int tomate;
     private int queso;
 
-    public Hamburguesa(int carne,int cebolla,int lechuga, int tomate, int queso){
+    public Hamburguesa(String combo, int carne, int cebolla, int lechuga, int tomate, int queso) {
+        this.combo = combo;
         this.carne = carne;
         this.cebolla = cebolla;
         this.lechuga = lechuga;
@@ -33,6 +38,14 @@ public class Hamburguesa {
 
     public int getCebolla() {
         return cebolla;
+    }
+
+    public String getCombo() {
+        return combo;
+    }
+
+    public void setCombo(String combo) {
+        this.combo = combo;
     }
 
     public void setCebolla(int cebolla) {
@@ -62,7 +75,32 @@ public class Hamburguesa {
     public void setQueso(int queso) {
         this.queso = queso;
     }
-    
-    
-    
+
+    public void mostrarHamburguesa(StringBuilder sb) {
+        int baseCantidad = 0;
+        if (getCombo().equalsIgnoreCase("Combo Simple")) {
+            baseCantidad = 1;
+        } else if (getCombo().equalsIgnoreCase("Combo Doble")) {
+            baseCantidad = 2;
+        } else if (getCombo().equalsIgnoreCase("Combo Triple")) {
+            baseCantidad = 3;
+        }
+
+        int carneExtra = getCarne() - baseCantidad;
+        int cebollaExtra = getCebolla() - baseCantidad;
+        int lechugaExtra = getLechuga() - baseCantidad;
+        int tomateExtra = getTomate() - baseCantidad;
+        int quesoExtra = getQueso() - baseCantidad;
+
+        sb.append(getCombo() + "\n")
+        .append(String.format("%-10s %-10s %-10s %-10s %-10s\n", "Carne", "Cebolla", "Lechuga", "Tomate", "Queso"))
+        .append(String.format("%-10d %-10d %-10d %-10d %-10d\n",
+                (carneExtra > 0 ? carneExtra : 0),
+                (cebollaExtra > 0 ? cebollaExtra : 0),
+                (lechugaExtra > 0 ? lechugaExtra : 0),
+                (tomateExtra > 0 ? tomateExtra : 0),
+                (quesoExtra > 0 ? quesoExtra : 0)))
+        .append("\n");
+    }
+
 }
