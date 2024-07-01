@@ -78,7 +78,6 @@ public class Sistema implements Serializable {
     }
 
     public void listaPorRoles(String referencia) {
-
         for (int i = 0; i < empleado.size(); i++) {
 
             try {
@@ -216,6 +215,7 @@ public class Sistema implements Serializable {
                 sb.append("ID del Pedido: ").append(pedido.getId()).append("\n")
                         .append("Fecha: ").append(pedido.getFecha()).append("\n")
                         .append("Precio Total: $").append(pedido.getPrecio()).append("\n")
+                        .append("Cliente: ").append(pedido.getCliente()).append("\n")
                         .append("Estado: ").append(pedido.getEstado()).append("\n")
                         .append("Detalles del Pedido:\n");
 
@@ -247,6 +247,7 @@ public class Sistema implements Serializable {
     }
 
     public void mostrarPedidoPorId(String id) {
+        EntradaSalida.limpiarPantalla();
         Pedido pedido = null;
 
         // Busco el pedido con el ID 
@@ -289,6 +290,7 @@ public class Sistema implements Serializable {
     }
 
     public void actualizarComanda(String id) {
+        EntradaSalida.limpiarPantalla();
         Pedido pedido = null;
 
         // Busco el pedido con el ID 
@@ -308,6 +310,57 @@ public class Sistema implements Serializable {
         } else {
             EntradaSalida.mostrarTexto("No se encontró el pedido con el ID: " + id);
         }
+    }
+
+    public void obtenerListadoVentas() {
+        EntradaSalida.limpiarPantalla();
+
+        EntradaSalida.mostrarTexto("********** LISTADO DE VENTAS **********\n");
+        int index_de_ventas = 1;
+        int total_vendido = 0;
+        float venta_mas_chica = Float.MAX_VALUE;
+        float venta_mas_grande = Float.MIN_VALUE;
+
+        for (Pedido pedido : pedidos) {
+            EntradaSalida.mostrarTexto(index_de_ventas + ". ID: " + pedido.getId() + ": $" + pedido.getPrecio());
+            total_vendido += pedido.getPrecio();
+
+            // Actualiza el precio de la venta más chica y la más grande
+            if (pedido.getPrecio() < venta_mas_chica) {
+                venta_mas_chica = pedido.getPrecio();
+            }
+            if (pedido.getPrecio() > venta_mas_grande) {
+                venta_mas_grande = pedido.getPrecio();
+            }
+
+            index_de_ventas++;
+        }
+
+        EntradaSalida.mostrarTexto("TOTAL VENDIDO: $" + total_vendido);
+        EntradaSalida.mostrarTexto("VENTA MAS CHICA: $" + venta_mas_chica);
+        EntradaSalida.mostrarTexto("VENTA MAS GRANDE: $" + venta_mas_grande);
+        EntradaSalida.mostrarTexto("***************************************");
+    }
+    
+
+    public void obtenerListadoPedidosCompletos() {
+        EntradaSalida.limpiarPantalla();
+
+        EntradaSalida.mostrarTexto("********** LISTADO DE PEDIDOS FINALIZADOS **********\n");
+        int contador_de_pedidos = 0;
+        int index_de_pedidos = 1;
+
+        for (Pedido pedido : pedidos) {
+            if(pedido.getEstado().equalsIgnoreCase("COMPLETO")){
+                EntradaSalida.mostrarTexto(index_de_pedidos + ". ID: " + pedido.getId() + ": " + pedido.getCliente());
+                
+                contador_de_pedidos += 1;
+            }
+        }
+        EntradaSalida.mostrarTexto("Total de pedidos completados: " + contador_de_pedidos);
+
+        
+        EntradaSalida.mostrarTexto("***************************************");
     }
 
 }

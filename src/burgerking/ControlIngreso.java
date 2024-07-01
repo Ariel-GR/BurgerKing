@@ -36,13 +36,12 @@ public class ControlIngreso {
                         sistema.getEmpleado().add(new Administrador(usuario, contraseña));
                         sistema.serializar("base_de_datos.txt");
                         EntradaSalida.mostrarTexto("El administrador fue ingresado correctamente por favor reincie el sistema");
-                    } catch (IOException e) {
-                    }
+                    } catch (IOException e) {}
         }
 
         while (validar) {
             usuario = EntradaSalida.leerString("Usuario: ");
-            contraseña = EntradaSalida.leerString("Contraseña: ");
+            contraseña = EntradaSalida.leerString("Contrasenia: ");
 
             if(!sistema.validarIngreso(usuario, contraseña)){
                 Persona p = sistema.buscarUsuario(usuario+":"+contraseña);

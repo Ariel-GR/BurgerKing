@@ -77,6 +77,18 @@ public class EntradaSalida {
                 + "0 - Salir");
     }
 
+    public static int menuInspector() {
+
+        return EntradaSalida.leerNro(
+                "\tSISTEMA PARA INSPECTORES\n"
+                + "1 - Consultar lista de TODOS LOS EMPLEADOS\n"
+                + "2 - Consultar lista de SALDOS\n"
+                + "3 - Consultar lista de PEDIDOS LISTO PARA SER ENTREGADOS\n"
+                + "4 - Consultar lista de PEDIDOS CANCELADOS\n"
+                + "5 - Consultar el TOTAL DE LO RECAUDADO\n"
+                + "0 - Salir");
+    }
+
     public static void limpiarPantalla() {
         for (int i = 0; i < 50; i++) {
             System.out.println();

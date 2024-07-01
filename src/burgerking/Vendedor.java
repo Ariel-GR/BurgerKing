@@ -30,9 +30,11 @@ public class Vendedor extends Persona {
     }
 
     private void tomarPedido(Sistema sistema) {
-        EntradaSalida.leerString("Ingrese el nombre del cliente:");
+        String nombre_cliente = EntradaSalida.leerString("Ingrese el nombre del cliente:");
+        
         String idPedido = String.valueOf(sistema.getPedidos().size());
         Pedido pedido = new Pedido(idPedido);  // El ID se genera aquí
+        pedido.setCliente(nombre_cliente);
         int i = 0;
         boolean flag = true;
 
