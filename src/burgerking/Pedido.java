@@ -3,11 +3,11 @@ package burgerking;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.time.LocalDate;
-import java.util.UUID;
 
 public class Pedido implements Serializable {
 
     private String id;
+    private String cliente;
     private LocalDate fecha;
     private float precio;
     private String estado;
@@ -17,9 +17,10 @@ public class Pedido implements Serializable {
 
     // Constructor
     public Pedido(String id) {
-        this.id = id + "-" + UUID.randomUUID().toString(); // Generar ID único usando UUID
+        this.id = id;
         this.fecha = LocalDate.now();
-        this.precio = precio;
+        this.cliente = cliente;
+        this.precio = 0;  // Inicializar el precio a 0
         this.hamburguesas = new ArrayList<>();
         this.bebidas = new ArrayList<>();
         this.papas = new ArrayList<>();
@@ -79,36 +80,34 @@ public class Pedido implements Serializable {
         this.estado = estado;
     }
 
-    public void agregarComboSimple() {
-        Hamburguesa hamburguesa = new Hamburguesa("Combo Simple", 1, 1, 1, 1, 1);
+    private void agregarCombo(String nombre, int carne, int cebolla, int lechuga, int tomate, int queso, String tamanioPapa, float precio) {
+        Hamburguesa hamburguesa = new Hamburguesa(nombre, carne, cebolla, lechuga, tomate, queso);
         Bebida bebida = new Bebida();
-        Papa papa = new Papa("Regular");
+        Papa papa = new Papa(tamanioPapa);
         this.hamburguesas.add(hamburguesa);
         this.bebidas.add(bebida);
         this.papas.add(papa);
-        precio = 100;
+        this.precio += precio; // Sumar el precio del combo al precio total del pedido
+    }
 
+    public void agregarComboSimple() {
+        agregarCombo("Combo Simple", 1, 1, 1, 1, 1, "Regular", 100);
     }
 
     public void agregarComboDoble() {
-        Hamburguesa hamburguesa = new Hamburguesa("Combo Doble", 2, 2, 2, 2, 2);
-        Bebida bebida = new Bebida();
-        Papa papa = new Papa("Mediano");
-        this.hamburguesas.add(hamburguesa);
-        this.bebidas.add(bebida);
-        this.papas.add(papa);
-        precio = 150;
-
+        agregarCombo("Combo Doble", 2, 2, 2, 2, 2, "Mediano", 150);
     }
 
     public void agregarComboTriple() {
-        Hamburguesa hamburguesa = new Hamburguesa("Combo Triple", 3, 3, 3, 3, 3);
-        Bebida bebida = new Bebida();
-        Papa papa = new Papa("Grande");
-        this.hamburguesas.add(hamburguesa);
-        this.bebidas.add(bebida);
-        this.papas.add(papa);
-        precio = 200;
+        agregarCombo("Combo Triple", 3, 3, 3, 3, 3, "Grande", 200);
     }
-    
+
+    public String getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(String cliente) {
+        this.cliente = cliente;
+    }
+
 }

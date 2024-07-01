@@ -94,7 +94,7 @@ public class Hamburguesa implements Serializable {
 
         sb.append(getCombo() + "\n")
         .append(String.format("%-10s %-10s %-10s %-10s %-10s\n", "Carne", "Cebolla", "Lechuga", "Tomate", "Queso"))
-        .append(String.format("%-10d %-10d %-10d %-10d %-10d\n",
+        .append(String.format("+%-10d %+-10d %+-10d %+-10d %+-10d\n",
                 (carneExtra > 0 ? carneExtra : 0),
                 (cebollaExtra > 0 ? cebollaExtra : 0),
                 (lechugaExtra > 0 ? lechugaExtra : 0),

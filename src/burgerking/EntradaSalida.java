@@ -4,6 +4,7 @@
  */
 package burgerking;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -23,10 +24,21 @@ public class EntradaSalida {
     }
 
     public static int leerNro(String texto) {
-
         Scanner scan = new Scanner(System.in);
-        System.out.println(texto);
-        int nro = scan.nextInt();
+        int nro = -1;  // Valor inicial fuera del rango de números válidos
+
+        while (true) {
+            System.out.println(texto);
+            try {
+                nro = scan.nextInt();
+                // Si se llega aquí, el número es válido
+                break;
+            } catch (InputMismatchException e) {
+                // Si hay una excepción, se limpia el buffer y se muestra un mensaje
+                scan.next();  // Limpiar el buffer de entrada
+                System.out.println("***Por favor ingrese un numero entero valido***");
+            }
+        }
 
         return nro;
     }
@@ -65,7 +77,6 @@ public class EntradaSalida {
                 + "0 - Salir");
     }
 
-    
     public static void limpiarPantalla() {
         for (int i = 0; i < 50; i++) {
             System.out.println();

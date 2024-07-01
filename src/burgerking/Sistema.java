@@ -245,4 +245,69 @@ public class Sistema implements Serializable {
 
         EntradaSalida.mostrarTexto(sb.toString());
     }
+
+    public void mostrarPedidoPorId(String id) {
+        Pedido pedido = null;
+
+        // Busco el pedido con el ID 
+        for (Pedido p : pedidos) {
+            if (p.getId().equals(id)) {
+                pedido = p;
+                break;
+            }
+        }
+
+        if (pedido != null) {
+            EntradaSalida.mostrarTexto("********** DETALLES DEL PEDIDO **********\n\n");
+            EntradaSalida.mostrarTexto("ID del Pedido: " + pedido.getId() + "\t");
+            EntradaSalida.mostrarTexto("Fecha: " + pedido.getFecha());
+            EntradaSalida.mostrarTexto("Estado: " + pedido.getEstado());
+            EntradaSalida.mostrarTexto("Detalles del Pedido:\n");
+
+            for (int i = 0; i < pedido.getHamburguesas().size(); i++) {
+                Hamburguesa hamburguesa = pedido.getHamburguesas().get(i);
+                EntradaSalida.mostrarTexto("\t-----" + hamburguesa.getCombo() + "-----");
+
+                StringBuilder hamburguesaDetalles = new StringBuilder();
+                hamburguesa.mostrarHamburguesa(hamburguesaDetalles);
+                EntradaSalida.mostrarTexto(hamburguesaDetalles.toString());
+
+                Bebida bebida = pedido.getBebidas().get(i);
+                EntradaSalida.mostrarTexto("Bebida: " + bebida.getSabor() + "\n");
+
+                Papa papa = pedido.getPapas().get(i);
+                EntradaSalida.mostrarTexto("Papas: " + papa.getTamanio() + "\n\n");
+            }
+            EntradaSalida.mostrarTexto("--------------------------------\n");
+
+            EntradaSalida.mostrarTexto("Precio Total: $" + pedido.getPrecio() + "\n");
+
+            EntradaSalida.mostrarTexto("***************************************");
+        } else {
+            EntradaSalida.mostrarTexto("No se encontró el pedido con el ID: " + id);
+        }
+    }
+
+    public void actualizarComanda(String id) {
+        Pedido pedido = null;
+
+        // Busco el pedido con el ID 
+        for (Pedido p : pedidos) {
+            if (p.getId().equals(id)) {
+                pedido = p;
+                break;
+            }
+        }
+
+        if (pedido != null) {
+            // Cambia el estado del pedido a "COMPLETO"
+            pedido.setEstado("COMPLETO");
+            EntradaSalida.mostrarTexto("Estado del pedido con ID " + id + " actualizado a COMPLETO.");
+
+            // Aquí se puede serializar si se quiere, pero en el caso del cocinero, se realiza en el método `trabajar`
+        } else {
+            EntradaSalida.mostrarTexto("No se encontró el pedido con el ID: " + id);
+        }
+    }
+
 }

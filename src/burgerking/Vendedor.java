@@ -30,7 +30,9 @@ public class Vendedor extends Persona {
     }
 
     private void tomarPedido(Sistema sistema) {
-        Pedido pedido = new Pedido(EntradaSalida.leerString("Ingrese el nombre del cliente:"));
+        EntradaSalida.leerString("Ingrese el nombre del cliente:");
+        String idPedido = String.valueOf(sistema.getPedidos().size());
+        Pedido pedido = new Pedido(idPedido);  // El ID se genera aquí
         int i = 0;
         boolean flag = true;
 
@@ -99,9 +101,9 @@ public class Vendedor extends Persona {
         } while (flag);
 
         EntradaSalida.mostrarTexto("Pedido completado.");
-        sistema.consultarPedidos("INCOMPLETO");
 
         sistema.getPedidos().add(pedido);
+        sistema.mostrarPedidoPorId(idPedido);
 
         try {
             sistema.serializar("base_de_datos.txt");

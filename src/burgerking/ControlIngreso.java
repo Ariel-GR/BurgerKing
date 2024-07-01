@@ -29,7 +29,7 @@ public class ControlIngreso {
             EntradaSalida.mostrarTexto("\tARRANQUE DE SISTEMA\n\n");
             do {
                 usuario = EntradaSalida.leerString("ingrese un administrador\nUsuario:");
-                contraseña = EntradaSalida.leerString("Contraseña:"); 
+                contraseña = EntradaSalida.leerString("Contrasenia:"); 
             }while (sistema.validarIngreso(usuario, contraseña));
             
             try {
