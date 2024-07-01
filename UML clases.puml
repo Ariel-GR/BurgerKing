@@ -1,0 +1,32 @@
+@startuml
+abstract class burgerking.Persona
+class burgerking.Administrador
+class burgerking.Bebida
+class burgerking.Cocineros
+class burgerking.ControlIngreso
+class burgerking.EntradaSalida
+class burgerking.Gerentes
+class burgerking.Hamburguesa
+class burgerking.Inspectores
+class burgerking.Main
+class burgerking.Papa
+class burgerking.Pedido
+class burgerking.Sistema
+class burgerking.Vendedor
+class java.io.FileInputStream
+class java.io.FileOutputStream
+class java.io.IOException
+class java.io.ObjectInputStream
+class java.io.ObjectOutputStream
+class java.time.LocalDate
+class java.util.ArrayList
+class java.util.InputMismatchException
+class java.util.Scanner
+class java.util.logging.Level
+class java.util.logging.Logger
+burgerking.Administrador --|> burgerking.Persona
+burgerking.Cocineros --|> burgerking.Persona
+burgerking.Gerentes --|> burgerking.Persona
+burgerking.Inspectores --|> burgerking.Persona
+burgerking.Vendedor --|> burgerking.Persona
+@enduml

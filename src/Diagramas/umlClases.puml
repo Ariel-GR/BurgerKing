@@ -1,0 +1,169 @@
+@startuml
+
+package burgerking {
+    
+    class Persona {
+        - user: String
+        - password: String
+        
+        + Persona(user: String, password: String)
+        + getUser(): String
+        + setUser(user: String): void
+        + getPassword(): String
+        + setPassword(password: String): void
+        + trabajar(sistema: Sistema): boolean
+    }
+
+    class Vendedor {
+        - OPCION_COMBO_SIMPLE: int
+        - OPCION_COMBO_DOBLE: int
+        - OPCION_COMBO_TRIPLE: int
+        - OPCION_INGREDIENTE_CARNE: int
+        - OPCION_INGREDIENTE_CEBOLLA: int
+        - OPCION_INGREDIENTE_LECHUGA: int
+        - OPCION_INGREDIENTE_TOMATE: int
+        - OPCION_INGREDIENTE_QUESO: int
+        - OPCION_SALIR: int
+        
+        + Vendedor(user: String, password: String)
+        + trabajar(sistema: Sistema): boolean
+        - tomarPedido(sistema: Sistema): void
+        - modificarIngrediente(hamburguesa: Hamburguesa, agregar: boolean, pedido: Pedido): void
+        - seleccionarBebida(bebida: Bebida, pedido: Pedido): void
+        - modificarTamanioPapas(papa: Papa, pedido: Pedido): void
+    }
+
+    class Administrador {
+        + Administrador(user: String, password: String)
+        + trabajar(sistema: Sistema): boolean
+        - mostrarInformacion(sistema: Sistema): void
+        - mostrarPedidos(sistema: Sistema): void
+        - mostrarClientes(sistema: Sistema): void
+    }
+
+    class Cocinero {
+        - pedido: Pedido
+        
+        + Cliente(user: String, password: String)
+        + verMenu(): void
+        + hacerPedido(pedido: Pedido): void
+        + modificarPedido(pedido: Pedido): void
+        + cancelarPedido(pedido: Pedido): void
+    }
+
+    class Inspectores {
+        + Inspectores(user: String, password: String)
+        + trabajar(sistema: Sistema): boolean
+    }
+
+    class Sistema {
+        - vendedores: ArrayList<Vendedor>
+        - administradores: ArrayList<Administrador>
+        - clientes: ArrayList<Cliente>
+        - pedidos: ArrayList<Pedido>
+        - inspectores: ArrayList<Inspectores>
+        
+        + Sistema()
+        + agregarVendedor(vendedor: Vendedor): void
+        + agregarAdministrador(administrador: Administrador): void
+        + agregarCliente(cliente: Cliente): void
+        + agregarInspector(inspector: Inspectores): void
+        + eliminarCliente(cliente: Cliente): void
+        + obtenerCliente(user: String): Cliente
+        + mostrarPedidoPorId(idPedido: String): void
+        + getPedidos(): ArrayList<Pedido>
+        + serializar(archivo: String): void
+        + deserializar(archivo: String): void
+        + listaPorRoles(rol: String): void
+        + obtenerListadoVentas(): void
+        + obtenerListadoPedidosCompletos(): void
+        + consultarPedidos(estado: String): void
+    }
+
+    class Pedido {
+        - id: String
+        - cliente: String
+        - hamburguesas: ArrayList<Hamburguesa>
+        - bebidas: ArrayList<Bebida>
+        - papas: ArrayList<Papa>
+        - precio: double
+        
+        + Pedido(id: String)
+        + getId(): String
+        + setId(id: String): void
+        + getCliente(): String
+        + setCliente(cliente: String): void
+        + getHamburguesas(): ArrayList<Hamburguesa>
+        + setHamburguesas(hamburguesas: ArrayList<Hamburguesa>): void
+        + getBebidas(): ArrayList<Bebida>
+        + setBebidas(bebidas: ArrayList<Bebida>): void
+        + getPapas(): ArrayList<Papa>
+        + setPapas(papas: ArrayList<Papa>): void
+        + getPrecio(): double
+        + setPrecio(precio: double): void
+        + agregarCombo(nombre: String, carne: int, cebolla: int, lechuga: int, tomate: int, queso: int, tamanio: String, precio: double): void
+    }
+
+    class Hamburguesa {
+        - carne: int
+        - cebolla: int
+        - lechuga: int
+        - tomate: int
+        - queso: int
+        
+        + Hamburguesa(carne: int, cebolla: int, lechuga: int, tomate: int, queso: int)
+        + getCarne(): int
+        + setCarne(carne: int): void
+        + getCebolla(): int
+        + setCebolla(cebolla: int): void
+        + getLechuga(): int
+        + setLechuga(lechuga: int): void
+        + getTomate(): int
+        + setTomate(tomate: int): void
+        + getQueso(): int
+        + setQueso(queso: int): void
+    }
+
+    class Bebida {
+        - sabor: String
+        
+        + Bebida(sabor: String)
+        + getSabor(): String
+        + setSabor(sabor: String): void
+    }
+
+    class Papa {
+        - tamanio: String
+        
+        + Papa(tamanio: String)
+        + getTamanio(): String
+        + setTamanio(tamanio: String): void
+    }
+
+    class EntradaSalida {
+        + mostrarTexto(texto: String): void
+        + leerString(pregunta: String): String
+        + leerNro(pregunta: String): int
+        + menuInspector(): int
+        + limpiarPantalla(): void
+        + siNo(pregunta: String): boolean
+    }
+
+    ' Relaciones
+    Persona <|-- Vendedor
+    Persona <|-- Administrador
+    Persona <|-- Cliente
+    Persona <|-- Inspectores
+    
+    Sistema "1" -- "0..*" Vendedor : tiene >
+    Sistema "1" -- "0..*" Administrador : tiene >
+    Sistema "1" -- "0..*" Cliente : tiene >
+    Sistema "1" -- "0..*" Inspectores : tiene >
+    Sistema "1" -- "0..*" Pedido : contiene >
+    Pedido "1" -- "0..*" Hamburguesa : tiene >
+    Pedido "1" -- "0..*" Bebida : tiene >
+    Pedido "1" -- "0..*" Papa : tiene >
+    
+    Cliente "1" -- "0..1" Pedido : realiza >
+
+@enduml
