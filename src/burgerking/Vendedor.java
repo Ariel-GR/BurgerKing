@@ -48,15 +48,18 @@ public class Vendedor extends Persona {
             switch (opcionCombo) {
                 case OPCION_COMBO_SIMPLE:
                     EntradaSalida.mostrarTexto("Ha seleccionado el Combo Simple.");
-                    pedido.agregarComboSimple();
+                    pedido.agregarCombo("Combo Simple", 1, 1, 1, 1, 1, "Regular", 100);
+;
                     break;
                 case OPCION_COMBO_DOBLE:
                     EntradaSalida.mostrarTexto("Ha seleccionado el Combo Doble.");
-                    pedido.agregarComboDoble();
+                    pedido.agregarCombo("Combo Doble", 2, 2, 2, 2, 2, "Mediano", 150);
+
                     break;
                 case OPCION_COMBO_TRIPLE:
                     EntradaSalida.mostrarTexto("Ha seleccionado el Combo Triple.");
-                    pedido.agregarComboTriple();
+                    pedido.agregarCombo("Combo Triple", 3, 3, 3, 3, 3, "Grande", 200);
+
                     break;
                 default:
                     EntradaSalida.mostrarTexto("Opcion invalida.");

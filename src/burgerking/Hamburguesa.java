@@ -100,6 +100,7 @@ public class Hamburguesa implements Serializable {
                 (lechugaExtra > 0 ? lechugaExtra : 0),
                 (tomateExtra > 0 ? tomateExtra : 0),
                 (quesoExtra > 0 ? quesoExtra : 0)))
+        
         .append("\n");
     }
 

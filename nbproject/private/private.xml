@@ -3,12 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/nicol/OneDrive/Escritorio/BurgerKing/src/burgerking/Bebida.java</file>
+            <file>file:/C:/Users/nicol/OneDrive/Escritorio/BurgerKing/src/burgerking/Gerentes.java</file>
+            <file>file:/C:/Users/nicol/OneDrive/Escritorio/BurgerKing/src/burgerking/Persona.java</file>
+            <file>file:/C:/Users/nicol/OneDrive/Escritorio/BurgerKing/src/burgerking/ControlIngreso.java</file>
             <file>file:/C:/Users/nicol/OneDrive/Escritorio/BurgerKing/src/burgerking/Vendedor.java</file>
+            <file>file:/C:/Users/nicol/OneDrive/Escritorio/BurgerKing/src/burgerking/Inspectores.java</file>
             <file>file:/C:/Users/nicol/OneDrive/Escritorio/BurgerKing/src/burgerking/Sistema.java</file>
-            <file>file:/C:/Users/nicol/OneDrive/Escritorio/BurgerKing/src/burgerking/Papa.java</file>
-            <file>file:/C:/Users/nicol/OneDrive/Escritorio/BurgerKing/src/burgerking/Pedido.java</file>
-            <file>file:/C:/Users/nicol/OneDrive/Escritorio/BurgerKing/src/burgerking/Hamburguesa.java</file>
+            <file>file:/C:/Users/nicol/OneDrive/Escritorio/BurgerKing/src/burgerking/Cocineros.java</file>
+            <file>file:/C:/Users/nicol/OneDrive/Escritorio/BurgerKing/src/burgerking/EntradaSalida.java</file>
         </group>
     </open-files>
 </project-private>

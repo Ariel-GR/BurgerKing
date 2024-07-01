@@ -80,7 +80,7 @@ public class Pedido implements Serializable {
         this.estado = estado;
     }
 
-    private void agregarCombo(String nombre, int carne, int cebolla, int lechuga, int tomate, int queso, String tamanioPapa, float precio) {
+    public void agregarCombo(String nombre, int carne, int cebolla, int lechuga, int tomate, int queso, String tamanioPapa, float precio) {
         Hamburguesa hamburguesa = new Hamburguesa(nombre, carne, cebolla, lechuga, tomate, queso);
         Bebida bebida = new Bebida();
         Papa papa = new Papa(tamanioPapa);
@@ -88,18 +88,6 @@ public class Pedido implements Serializable {
         this.bebidas.add(bebida);
         this.papas.add(papa);
         this.precio += precio; // Sumar el precio del combo al precio total del pedido
-    }
-
-    public void agregarComboSimple() {
-        agregarCombo("Combo Simple", 1, 1, 1, 1, 1, "Regular", 100);
-    }
-
-    public void agregarComboDoble() {
-        agregarCombo("Combo Doble", 2, 2, 2, 2, 2, "Mediano", 150);
-    }
-
-    public void agregarComboTriple() {
-        agregarCombo("Combo Triple", 3, 3, 3, 3, 3, "Grande", 200);
     }
 
     public String getCliente() {
@@ -110,4 +98,5 @@ public class Pedido implements Serializable {
         this.cliente = cliente;
     }
 
+    
 }

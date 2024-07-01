@@ -342,7 +342,6 @@ public class Sistema implements Serializable {
         EntradaSalida.mostrarTexto("***************************************");
     }
     
-
     public void obtenerListadoPedidosCompletos() {
         EntradaSalida.limpiarPantalla();
 
@@ -351,7 +350,7 @@ public class Sistema implements Serializable {
         int index_de_pedidos = 1;
 
         for (Pedido pedido : pedidos) {
-            if(pedido.getEstado().equalsIgnoreCase("COMPLETO")){
+            if(pedido.getEstado().equalsIgnoreCase("COMPLETO")){ 
                 EntradaSalida.mostrarTexto(index_de_pedidos + ". ID: " + pedido.getId() + ": " + pedido.getCliente());
                 
                 contador_de_pedidos += 1;
@@ -363,4 +362,6 @@ public class Sistema implements Serializable {
         EntradaSalida.mostrarTexto("***************************************");
     }
 
+    
+    
 }
