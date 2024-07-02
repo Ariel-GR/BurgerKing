@@ -3,7 +3,7 @@ left to right direction
 actor Usuario as U
 
 rectangle "Sistema" {
-    U --> (Iniciar sesión)
+    
     
     (Tomar pedido)
     (Modificar ingredientes del pedido)
@@ -15,6 +15,10 @@ rectangle "Sistema" {
     (Consultar empleados)
     (Consultar ventas)
     (Consultar pedidos completados)
+    (Consultar pedidos)
+    (Actualizar estado de pedidos)
+(Despachar pedidos)
+U --> (Iniciar sesión)
 }
 
 rectangle "Persona" {
@@ -26,17 +30,25 @@ rectangle "Persona" {
     (Dar de alta un usuario) -- (Gerentes)
 
     (Cambiar rol de usuario) -- (Gerentes)
-
+(Trabajar) -- (Administrador)
+(Trabajar) -- (Cocineros)
+(Trabajar) -- (Gerentes)
+(Trabajar) -- (Inspectores)
+(Trabajar) -- (Vendedor)
     (Tomar pedido) -- (Vendedor)
     (Modificar ingredientes del pedido) -- (Vendedor)
     (Seleccionar bebida) -- (Vendedor)
     (Modificar tamaño de las papas) -- (Vendedor)
+    (Consultar pedidos) -- (Vendedor)
+    (Actualizar estado de pedidos) -- (Vendedor)
 
     (Consultar empleados) -- (Inspectores)
     (Consultar ventas) -- (Inspectores)
     (Consultar pedidos completados) -- (Inspectores)
 
-    (SistemaPedidos) -- (Cocineros)
+(Consultar pedidos) -- (Cocineros)
+(Despachar pedidos) -- (Cocineros)
+
 }
 
 (Iniciar sesión) --> (ControlIngreso)
