@@ -105,7 +105,6 @@ public class Vendedor extends Persona {
 
         } while (flag);
 
-        EntradaSalida.mostrarTexto("Pedido completado.");
 
         sistema.getPedidos().add(pedido);
         sistema.mostrarPedidoPorId(idPedido);

@@ -153,22 +153,20 @@ package burgerking {
         -modificarTamañoPapas(Papa papa, Pedido pedido)
     }
 
-    Persona <|-- Cocineros : "es un tipo de"
-    Persona <|-- Gerentes : "es un tipo de"
-    Persona <|-- Inspectores : "es un tipo de"
-    Persona <|-- Vendedor : "es un tipo de"
-    Persona <|-- Administrador : "es un tipo de"
+    Persona <|-- Cocineros : "1...1"
+    Persona <|-- Gerentes : "1...1"
+    Persona <|-- Inspectores : "1...1"
+    Persona <|-- Vendedor : "1...1"
+    Persona <|-- Administrador : "1...1"
 
-    Pedido *-- Hamburguesa : "contiene"
-    Pedido *-- Bebida : "contiene"
-    Pedido *-- Papa : "contiene"
-    Sistema o-- Persona : "emplea"
-    Sistema o-- Pedido : "contiene"
-    ControlIngreso *-- Sistema : "controla"
-    Persona .. Sistema : "interactúa con"
+    Pedido *-- Hamburguesa : "1...*"
+    Pedido *-- Bebida : "1...*"
+    Pedido *-- Papa : "1...*"
+    Sistema o-- Persona : "1...*"
+    Sistema o-- Pedido : "1...*"
+    ControlIngreso *-- Sistema : "1...*"
+    Persona .. Sistema : "1...*"
 
 }
-
-
 
 @enduml
