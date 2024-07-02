@@ -2,6 +2,17 @@
 
 package burgerking {
     
+    abstract class Persona {
+        -String user
+        -String password
+        +getUser() : String
+        +getPassword() : String
+        +setUser(String user)
+        +setPassword(String password)
+        +trabajar(Sistema sistema) : boolean
+        +encontrarCredenciales(String credenciales) : boolean
+    }
+
     class Administrador {
         +Administrador(String user, String password)
         +trabajar(Sistema sistema) : boolean
@@ -110,17 +121,6 @@ package burgerking {
         +setCliente(String cliente)
     }
 
-    class Persona {
-        -String user
-        -String password
-        +getUser() : String
-        +getPassword() : String
-        +setUser(String user)
-        +setPassword(String password)
-        +trabajar(Sistema sistema) : boolean
-        +encontrarCredenciales(String credenciales) : boolean
-    }
-
     class Sistema {
         -ArrayList<Persona> empleado
         -ArrayList<Pedido> pedidos
@@ -142,6 +142,11 @@ package burgerking {
         +actualizarComanda(String id)
         +obtenerListadoVentas()
         +obtenerListadoPedidosCompletos()
+        +crearAdministrador(String user, String password) : Administrador
+        +crearCocinero(String user, String password) : Cocineros
+        +crearInspector(String user, String password) : Inspectores
+        +crearGerente(String user, String password) : Gerentes
+        +crearVendedor(String user, String password) : Vendedor
     }
 
     class Vendedor {
@@ -153,20 +158,25 @@ package burgerking {
         -modificarTamañoPapas(Papa papa, Pedido pedido)
     }
 
-    Persona <|-- Cocineros : "1...1"
-    Persona <|-- Gerentes : "1...1"
-    Persona <|-- Inspectores : "1...1"
-    Persona <|-- Vendedor : "1...1"
-    Persona <|-- Administrador : "1...1"
+    Persona <|-- Cocineros : "1..1"
+    Persona <|-- Gerentes : "1..1"
+    Persona <|-- Inspectores : "1..1"
+    Persona <|-- Vendedor : "1..1"
+    Persona <|-- Administrador : "1..1"
 
-    Pedido *-- Hamburguesa : "1...*"
-    Pedido *-- Bebida : "1...*"
-    Pedido *-- Papa : "1...*"
-    Sistema o-- Persona : "1...*"
-    Sistema o-- Pedido : "1...*"
-    ControlIngreso *-- Sistema : "1...*"
-    Persona .. Sistema : "1...*"
+    Pedido *-- Hamburguesa : "1..*"
+    Pedido *-- Bebida : "1..*"
 
+    Pedido *-- Papa : "1..*"
+    
+
+Sistema o-- Pedido: "1..*"
+    ControlIngreso *-- Sistema : "1..*"
+    Sistema --> Administrador : "crear"
+    Sistema --> Cocineros : "crear"
+    Sistema --> Inspectores : "crear"
+    Sistema --> Gerentes : "crear"
+    Sistema --> Vendedor : "crear"
 }
 
 @enduml
