@@ -17,6 +17,7 @@ public class ControlIngreso {
     private String usuario;
     private String contraseña;
     private boolean validar;
+    private int cont = 0;
 
     public void ingresar() {
 
@@ -47,12 +48,23 @@ public class ControlIngreso {
                 Persona p = sistema.buscarUsuario(usuario+":"+contraseña);
                 if(p == null){
                     EntradaSalida.mostrarTexto("\nUsuario NO encontrado\n");
+                    cont++;
+                System.out.println(cont);
+                if(cont == 5){
+                    validar = false;
+                    EntradaSalida.mostrarTexto("NUMERO DE INTENTOS EXCEDIDO\n"
+                                               +"POR FAVOR COMUNIQUESE CON UN ADMINISTRADOR \n"
+                                               + "O VERIFIQUE SUS CREDENCIALES");
+                }
                 }else{
                     validar = p.trabajar(sistema);
+                    if(EntradaSalida.siNo("¿Desea volver ingresar ? si/no")){
+                        validar = true;
+                    }  
                 }
-            }else{
-                EntradaSalida.mostrarTexto("\n***usuario no encontrado***\n");
             }
+     
         }
+        EntradaSalida.mostrarTexto("Sea finalizado el programa.");
     }
 }

@@ -59,7 +59,7 @@ public class Sistema implements Serializable {
 
         for (Persona p : empleado) {
             if (p.encontrarCredenciales(credenciales)) {
-                EntradaSalida.mostrarTexto("\n---Usuario Encontrado---\n");
+                EntradaSalida.mostrarTexto("\n---INICIO DE SESION EXITOSO---\n");
                 return p;
             }
         }
